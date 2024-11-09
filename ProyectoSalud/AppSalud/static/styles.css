@@ -1,0 +1,26 @@
+/*Centrar el formulario vertical y horizontalmente*/
+.form-container{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 100vh; /*Ocupa toda la altura de la pantalla*/
+}
+
+/*Ajustar el ancho de la cajas de texto*/
+.form-container form{
+    width: 100%;
+    max-width: 400px;
+
+}
+
+body {
+    background-color: aqua;  /* Ruta de la imagen */
+    background-size: cover;        /* Hace que la imagen cubra todo el fondo */
+    background-position: center center;  /* Centra la imagen */
+    background-repeat: no-repeat;   /* Evita que la imagen se repita */
+    min-height: 100vh;              /* Asegura que el fondo cubra al menos toda la altura de la pantalla */
+    margin: 0;                      /* Elimina márgenes por defecto */
+    padding: 0;                     /* Elimina relleno por defecto */
+    display: flex;                  /* Permite el uso de flexbox para centrar el contenido si es necesario */
+    flex-direction: column;         /* Organiza el contenido en columna (si necesitas más control) */
+}
