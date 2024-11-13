@@ -43,11 +43,6 @@ urlpatterns = [
     path('buscar_nombre_paciente/', views.buscar_nombre_Pacientes, name='Buscar_Paciente'),
     path('actualizar_paciente/<paciente_id>/', views.actualizar_paciente, name='Actualizar_Paciente'),
     path('eliminar_paciente/<paciente_id>/', views.eliminar_paciente, name='Eliminar_Paciente'),
-    #path('prepagas/',views.mostrar_prepagas,name="Prepagas"),
-    #path('crear_prepaga/',views.crear_prepaga,name="Crear_Prepaga"),
-    #path('buscar_prepaga/',views.buscar_nombre_prepaga,name="Buscar_Prepaga"),
-    #path('actualizar_prepaga/<nombre_prepaga>/',views.actualizar_prepaga,name="Actualizar_Prepaga"),
-    #path('eliminar_prepaga/<nombre_prepaga>/',views.eliminar_prepaga,name="Eliminar_Prepaga"),
     path('sedesclinicas/',views.mostrar_sede_clinica,name="Sedesclinicas"),
     path('crear_sede/', views.crear_sede, name='Crear_Sede'),
     path('buscar_sede/', views.buscar_sede, name="Buscar_Sede"),
@@ -56,4 +51,10 @@ urlpatterns = [
     path('registro/', views.registro_usuario, name='Registro'),
     path('login/', views.login_request, name='Login'),
     path('logout/', views.logout_request, name='Logout'),
+    path('politicas-de-privacidad/', views.privacy_policy, name='privacy_policy'),
+    path('terminos-y-condiciones/', views.terms_conditions, name='terms_conditions'),
+    path('contacto/', views.contacto, name='contacto'),
+    path('gracias/', views.pagina_de_gracias, name='pagina_de_gracias'),
+    path('mensajes/', views.listar_mensajes, name='listar_mensajes'),
+
 ]

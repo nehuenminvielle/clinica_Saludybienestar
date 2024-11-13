@@ -4,6 +4,15 @@ from .forms import *
 from django.contrib import messages
 from django.contrib.auth import login,logout,authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import Cobertura
+from .forms import crear_Coberturas_forms  # Asegúrate de importar el formulario
+from django.core.mail import send_mail
+from django.conf import settings
+from django.contrib import admin
+from django.core.paginator import Paginator
+from django.core.mail import EmailMessage
+from django.template.loader import render_to_string
 
 def mostrar_index(request):
     
@@ -29,7 +38,7 @@ def crear_Numero_de_Turno(request):
 
             turnos.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Numeros_de_Turnos')
         
     
     else:
@@ -70,7 +79,7 @@ def actualizar_Numero_de_Turno(request, turno_id):
 
             turno.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Numeros_de_Turnos')
     
     else:
         form = crear_Numero_de_Turnos_forms(initial={'id_turno': turno.id_turno, 'fecha': turno.fecha, 'hora': turno.hora, 'id_numero_de_consultorio': turno.id_numero_de_consultorio, 'id_sede': turno.id_sede, 'id_dni_paciente': turno.id_dni_paciente})
@@ -80,13 +89,9 @@ def actualizar_Numero_de_Turno(request, turno_id):
 def eliminar_numero_de_turno(request, turno_id):
     turno = Numero_de_Turno.objects.get(id_turno=turno_id)
     turno.delete()
-
-    turno = turno.objects.all()
-
-    context = {'turno': turno}
+    return redirect('Numeros_de_Turnos')  # Redirige a mostrar_turnos
 
 
-    return redirect('Numeros_de_turnos')  # Redirige a mostrar_turnos
 
 def mostrar_medicos(request):
     medicos = Medicos.objects.all()
@@ -106,7 +111,7 @@ def crear_Medico(request):
 
             medicos.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Medicos')
     
     else:
         form = crear_Medico_forms()
@@ -144,7 +149,7 @@ def actualizar_Medico(request, medico_id):
 
             medico.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Medicos')
     
     else:
         form = crear_Medico_forms(initial={'id_especialidad': medico.id_especialidad, 'nombre_medico': medico.nombre_medico, 'apellido_medico': medico.apellido_medico, 'dni_medico': medico.dni_medico, 'id_matricula': medico.id_matricula, 'id_numero_de_consultorio': medico.id_numero_de_consultorio, 'id_sede': medico.id_sede})
@@ -154,12 +159,7 @@ def actualizar_Medico(request, medico_id):
 def eliminar_medico(request, medico_id):
     medico = Medicos.objects.get(id=medico_id)
     medico.delete()
-
-    medico = medico.objects.all()
-
-    context = {'medico': medico}
-
-    return render(request, 'AppSalud/index.html',context=context)
+    return redirect('Medicos')
 
 def mostrar_matricula(request):
     matricula = Matricula.objects.all()
@@ -179,7 +179,7 @@ def crear_Matricula(request):
 
             matricula.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Matricula')
     
     else:
         form = crear_Matricula_forms()
@@ -223,7 +223,7 @@ def actualizar_Matricula(request, matricula_id):
             matricul.pacientes_atendidos = formulario_limpio['pacientes_atendidos']
             matricul.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Matricula')
     
     else:
         form = crear_Matricula_forms(initial={'matricula': matricul.matricula, 'numero_legajo': matricul.numero_legajo, 'años_de_servicio': matricul.años_de_servicio, 'pacientes_atendidos': matricul.pacientes_atendidos})
@@ -233,19 +233,12 @@ def actualizar_Matricula(request, matricula_id):
 def eliminar_matricula(request, matricula_id):
     matricula = Matricula.objects.get(matricula=matricula_id)
     matricula.delete()
-
-    matricula = matricula.objects.all()
-
-    context = {'matricula': matricula}
-
-    return render(request, 'AppSalud/index.html',context=context)
+    return redirect('Matricula')
 
 
 
 
-from django.shortcuts import render, redirect, get_object_or_404
-from .models import Cobertura
-from .forms import crear_Coberturas_forms  # Asegúrate de importar el formulario
+
 
 def mostrar_coberturas(request):
     cobertura = Cobertura.objects.all()
@@ -262,7 +255,7 @@ def crear_coberturas(request):
             return redirect('Coberturas')  # Redirige a mostrar_coberturas
     else:
         form = crear_Coberturas_forms()
-    return render(request, 'AppSalud/crear_coberturas.html', {'form': form})
+    return redirect('Coberturas')
 
 def buscar_nombre_cobertura(request):
     respuesta = None  
@@ -292,7 +285,7 @@ def actualizar_coberturas(request, id_cobertura):
             return redirect('Coberturas')  
     else:
         form = crear_Coberturas_forms(initial={'nombre_cobertura': cobertura.nombre_cobertura})
-    return render(request, 'AppSalud/actualizar_cobertura.html', {'form': form})
+    return redirect('Coberturas')
 
 
 
@@ -323,7 +316,7 @@ def crear_especialidades(request):
 
             especialidades.save()
 
-            return render(request,'AppSalud/index.html')
+            return redirect('Especialidades')
         
     else:
         form=crear_Especialidades_forms()
@@ -361,7 +354,7 @@ def actualizar_especialidades(request,id_especialidad):
     else:
         form = crear_Especialidades_forms(initial={'nombre_especialidad': especialidad.nombre_especialidad})
     
-    return render(request, 'AppSalud/actualizar_especialidad.html', {'form': form})
+    return redirect('Especialidades')
 
     
 
@@ -400,7 +393,7 @@ def crear_localidades(request):
 
             Localidades.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Localidades')
     
     else:
         form = crear_Localidades_forms()
@@ -563,7 +556,7 @@ def crear_sede(request):
 
             sede.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Sedesclinicas') 
     
     else:
         form = crear_Sede_forms()
@@ -668,7 +661,7 @@ def crear_pacientes(request):
             pacientes.save()
 
             
-            return render(request, 'AppSalud/index.html')
+            return redirect('Pacientes')
     
     else:
         form = crear_Pacientes_forms()
@@ -696,12 +689,7 @@ def buscar_nombre_Pacientes(request):
 def eliminar_paciente(request, paciente_id):
     paciente = Pacientes.objects.get(id_dni=paciente_id)
     paciente.delete()
-
-    paciente = paciente.objects.all()
-
-    context = {'paciente': paciente}
-
-    return render(request, 'AppSalud/index.html',context=context)
+    return redirect('Pacientes')
 
 def actualizar_paciente(request, paciente_id):
     paciente = Pacientes.objects.get(id_dni=paciente_id)
@@ -721,7 +709,7 @@ def actualizar_paciente(request, paciente_id):
             paciente.id_localidad = formulario_limpio['id_localidad']
             paciente.save()
 
-            return render(request, 'AppSalud/index.html')
+            return redirect('Pacientes')
     
     else:
         form = crear_Pacientes_forms(initial={'id_dni': paciente.id_dni, 'nombre_paciente': paciente.nombre_paciente, 'apellido_paciente': paciente.apellido_paciente, 'fecha_nacimiento': paciente.fecha_nacimiento, 'sexo_paciente': paciente.sexo_paciente, 'id_cobertura': paciente.id_cobertura, 'id_localidad': paciente.id_localidad})
@@ -784,3 +772,81 @@ def login_request(request):
 def logout_request(request):
     logout(request)
     return render(request,"AppSalud/index.html",{"mensaje":"Has cerrado sesion exitosamente"})
+
+
+def privacy_policy(request):
+    return render(request,'AppSalud/privacy_policy.html')
+
+
+def terms_conditions(request):
+    return render(request,'AppSalud/terms_conditions.html')
+
+
+
+def contacto(request):
+    if request.method == 'POST':
+        nombre= request.POST.get('nombre')
+        email= request.POST.get('email')
+        mensaje= request.POST.get('mensaje')
+        asunto= request.POST.get('asunto')
+
+        template = render_to_string('AppSalud/email-template.html',{
+             'nombre':nombre,
+             'email':email,
+             'mensaje':mensaje,
+             'asunto':asunto
+        })
+        
+        emailSender= EmailMessage(
+            asunto,
+            template,
+            settings.EMAIL_HOST_USER,
+            ['clinicasaludybienestar1@gmail.com']
+        )
+        emailSender.content_subtype = 'html'
+        emailSender.fail_silently= False
+        emailSender.send()
+        
+        if nombre and email and mensaje:
+            #Guardar el mensaje en la base de datos
+            MensajeContacto.objects.create(
+                nombre=nombre,
+                email=email,
+                mensaje=mensaje,
+                
+            )
+            #Enviar confirmacion al usuario
+            send_mail(
+                'Gracias por contactarnos',
+                f'Hola {nombre}, hemos recibido tu mensaje y te contactaremos pronto',
+                settings.DEFAULT_FROM_EMAIL,
+                [email]
+            )
+
+            messages.success(request,'Mensaje enviado exitosamente')
+            return redirect('pagina_de_gracias')
+        
+        else:
+            messages.error(request,'Por favor,completa todos los campos')
+
+    return render(request,'AppSalud/contacto.html')
+
+
+def pagina_de_gracias(request):
+    return render(request,'AppSalud/gracias.html')
+
+@admin.register(MensajeContacto)
+class MensajeContactoAdmin(admin.ModelAdmin):
+    list_display = ('nombre','email','fecha_envio')
+    search_fields=('nombre','email')
+
+
+
+def listar_mensajes(request):
+    mensajes=MensajeContacto.objects.all().order_by('-fecha_envio')
+    paginator= Paginator(mensajes,10)
+    page_number= request.GET.get('page')
+    page_obj= paginator.get_page(page_number)
+
+    return render(request,'AppSalud/lista_mensajes.html', {'page_obj': page_obj})
+
