@@ -197,16 +197,7 @@ def buscar_numero_matricula(request):
     
     return render(request, 'AppSalud/buscar_numero_matricula.html', {'respuesta': respuesta})
 
-def buscar_nombre_medico(request):
-    if request.GET.get('nombre_medico', False):
-        nombre_medico = request.GET['nombre_medico']
-        medico = Medicos.objects.filter(nombre_medico__icontains=nombre_medico)
 
-        return render(request, 'AppSalud/buscar_nombre_medico.html', {'medicos': medico})
-    else:
-        respuesta = 'No se encuentra el Nombre del Medico'
-    
-    return render(request, 'AppSalud/buscar_nombre_medico.html', {'respuesta': respuesta})
 
 def actualizar_Matricula(request, matricula_id):
     matricul = Matricula.objects.get(matricula=matricula_id)
@@ -446,95 +437,6 @@ def eliminar_localidades(request,id_localidad):
 
     return redirect('Localidades')
 
- 
-
-
-
-
-
-
-
-
-#def mostrar_prepagas(request):
-
-    prepagas=Prepaga.objects.all()
-
-    context={'prepagas':prepagas}
-
-    return render(request,'AppSalud/prepaga.html',context=context)
-
-
-#def crear_prepaga(request):
-    if request.method == 'POST':
-        form=crear_Prepaga_forms(request.POST)
-
-        if form.is_valid():
-            formulario_limpio = form.cleaned_data
-            
-            Prepagas = Prepaga(nombre_prepaga=formulario_limpio['nombre_prepaga'], plan=formulario_limpio['plan'])
-
-            Prepagas.save()
-
-            return render(request, 'AppSalud/index.html')
-    
-    else:
-        form = crear_Prepaga_forms()
-
-    return render(request, 'AppSalud/crear_prepagas.html', {'form': crear_Prepaga_forms})
-     
-    
-
-#def buscar_nombre_prepaga(request):
-
-    if request.GET.get('nombre_prepaga', False):
-        nombre_prepaga = request.GET['nombre_prepaga']
-        prepaga = Prepaga.objects.filter(nombre_prepaga__icontains=nombre_prepaga)
-
-        return render(request, 'AppSalud/buscar_nombre_prepaga.html', {'prepagas': prepaga})
-    else:
-        respuesta = 'No se encuentra la Prepaga'
-    
-    return render(request, 'AppSalud/buscar_nombre_prepaga.html', {'respuesta': respuesta})
-    
-
-
-#def actualizar_prepaga(request, nombre_prepaga):
-    prepagas = Prepaga.objects.get(nombre_prepaga=nombre_prepaga)
-    if request.method == 'POST':
-        form = crear_Prepaga_forms(request.POST)
-
-        if form.is_valid():
-
-            formulario_limpio = form.cleaned_data
-
-            
-            prepagas.nombre_prepaga = formulario_limpio['nombre_prepaga']
-            prepagas.plan = formulario_limpio['plan']
-            
-            prepagas.save()
-
-            return render(request, 'AppSalud/index.html')
-    
-    else:
-        form = crear_Prepaga_forms(initial={'nombre_prepaga': prepagas.nombre_prepaga,'plan':prepagas.plan})
-    
-    return render(request, 'AppSalud/actualizar_prepaga.html', {'form': crear_Prepaga_forms})
-
-
-
-
-#def eliminar_prepaga(request, prepaga_id):
-    prepagas = Prepaga.objects.get(prepagas, id=Prepaga.id)
-    prepagas.delete()
-
-    prepagas = prepagas.objects.all()
-
-    context = {'prepagas': prepagas}
-
-    return render(request, 'AppSalud/index.html',context=context)
-
-
-
 
 
 def mostrar_sede_clinica(request):
@@ -618,16 +520,6 @@ def eliminar_sede(request, id_sede):  # Usamos id_sede como parámetro único
 
 
 
-
-
-
-
-def mostrar_medicos(request):
-    medico=Medicos.objects.all()
-    
-    context={'medico':medico}
-    
-    return render(request,'AppSalud/medicos.html', context=context)
 
 
 

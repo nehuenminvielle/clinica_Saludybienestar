@@ -84,7 +84,7 @@ DATABASES = {
         'HOST': 'localhost',
         'PORT': '3306',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': '@Cfl4062024Abd',
         'NAME': 'clinica_salud',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
@@ -139,7 +139,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'clinicasaludybienestar1@gmail.com'
-EMAIL_HOST_PASSWORD = 'Tu contraseña'
+EMAIL_HOST_PASSWORD = 'ywvwxmvpcfdpllyi'
 DEFAULT_FROM_EMAIL = 'clinicasaludybienestar1@gmail.com'
 CONTACT_EMAIL = 'clinicasaludybienestar1@gmail.com'
 EMAIL_USE_TLS = True 
