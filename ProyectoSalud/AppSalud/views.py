@@ -246,7 +246,9 @@ def crear_coberturas(request):
             return redirect('Coberturas')  # Redirige a mostrar_coberturas
     else:
         form = crear_Coberturas_forms()
-    return redirect('Coberturas')
+    return render(request,'AppSalud/crear_coberturas.html', {'form': crear_Coberturas_forms})
+
+
 
 def buscar_nombre_cobertura(request):
     respuesta = None  
@@ -276,7 +278,7 @@ def actualizar_coberturas(request, id_cobertura):
             return redirect('Coberturas')  
     else:
         form = crear_Coberturas_forms(initial={'nombre_cobertura': cobertura.nombre_cobertura})
-    return redirect('Coberturas')
+    return render(request, 'AppSalud/actualizar_cobertura.html', {'form': form})
 
 
 
@@ -345,7 +347,7 @@ def actualizar_especialidades(request,id_especialidad):
     else:
         form = crear_Especialidades_forms(initial={'nombre_especialidad': especialidad.nombre_especialidad})
     
-    return redirect('Especialidades')
+    return render(request, 'AppSalud/actualizar_especialidad.html', {'form': form})
 
     
 
