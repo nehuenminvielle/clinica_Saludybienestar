@@ -1,5 +1,4 @@
 {% extends "AppSalud/base.html" %}
-
 {% load static %}
 {% load crispy_forms_tags %}
 
@@ -15,6 +14,17 @@
             <img src="{% static 'logindoctor.jpg' %}" alt="Doctor">
         </div>
         <h2>Inicio de sesión</h2>
+
+        <!-- Mostrar mensajes de error si existen -->
+        {% if messages %}
+            <div class="alert alert-danger">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Formulario de login -->
         <form method="POST" onsubmit="showLoading(event);">
             {% csrf_token %}
             {{ form|crispy }}

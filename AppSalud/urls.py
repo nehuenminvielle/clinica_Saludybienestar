@@ -56,5 +56,6 @@ urlpatterns = [
     path('contacto/', views.contacto, name='contacto'),
     path('gracias/', views.pagina_de_gracias, name='pagina_de_gracias'),
     path('mensajes/', views.listar_mensajes, name='listar_mensajes'),
+    path('about/', views.mostrar_about, name='About'),
 
 ]

@@ -16,7 +16,9 @@ def mostrar_index(request):
     
     return render (request, 'AppSalud/index.html')
 
-
+def mostrar_about(request):
+    
+    return render(request, 'AppSalud/about.html')
 
 def mostrar_Numero_de_Turno(request):
     numero_de_turno = Numero_de_Turno.objects.all()
@@ -741,30 +743,33 @@ def registro_usuario(request):
     return render(request, 'AppSalud/registro.html', {'form': form})
 
 def login_request(request):
-    if request.method=="POST":
-        form=AuthenticationForm(request, data=request.POST)
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
         
         if form.is_valid():
-            usuario= form.cleaned_data.get('username')
-            contra= form.cleaned_data.get('password')
+            usuario = form.cleaned_data.get('username')
+            contra = form.cleaned_data.get('password')
             
-            user= authenticate(username=usuario, password=contra)
-            
+            # Autenticación del usuario
+            user = authenticate(username=usuario, password=contra)
             
             if user is not None:
-                login(request,user)
-                
-                return render(request,'AppSalud/index.html',{"mensaje":f"Bienvenido {usuario}"})
-            
+                login(request, user)
+                # Redirige al index con un mensaje de bienvenida
+                return render(request, 'AppSalud/index.html', {"mensaje": f"Bienvenido {usuario}"})
             else:
-                return render(request,"AppSalud/index.html",{"mensaje":"Error,datos incorrectos"})
-            
-        else:
-            return render(request,"AppSalud/index.html",{"mensaje":"Error,formulario erroneo"})
+                # Si el usuario no es autenticado, muestra un mensaje de error
+                messages.error(request, "Error, datos incorrectos")
+                return render(request, "AppSalud/login.html", {'form': form})
         
-    form = AuthenticationForm()
+        else:
+            # Si el formulario no es válido, muestra un mensaje de error
+            messages.error(request, "Error, formulario erroneo")
+            return render(request, "AppSalud/login.html", {'form': form})
     
-    return render(request,"AppSalud/login.html",{'form':form})
+    # Si la petición es GET, muestra el formulario vacío
+    form = AuthenticationForm()
+    return render(request, "AppSalud/login.html", {'form': form})
 
 
 def logout_request(request):

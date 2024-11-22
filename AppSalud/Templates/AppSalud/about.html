@@ -1,0 +1,99 @@
+{% extends "AppSalud/base.html" %}
+{% load static %}
+
+{% block title %}
+    Sobre Nosotros
+{% endblock title %}
+
+{% block codigoDinamico %}
+<style>
+    /* Sobrescribir el fondo solo para la página "About Us" */
+    body {
+        background-image: none !important; /* Elimina la imagen de fondo */
+    }
+</style>
+
+<body>
+   
+    </style>
+
+    <section class="about-us">
+        <div class="container">
+            <h1 class="text-center my-5">Sobre Nosotros</h1>
+            
+            <!-- Misión -->
+            <div class="row">
+                <div class="col-md-6">
+                    <h3>Misión</h3>
+                    <p>En Clínica Salud y Bienestar, nuestra misión es proporcionar atención médica integral y de alta calidad para mejorar la salud y el bienestar de nuestros pacientes. Nos esforzamos por ofrecer un servicio personalizado y comprometido, utilizando las últimas tecnologías y tratamientos innovadores.</p>
+                </div>
+                
+                <!-- Visión -->
+                <div class="col-md-6">
+                    <h3>Visión</h3>
+                    <p>Ser la clínica líder en salud integral, reconocida por su excelencia, compromiso con el bienestar y la satisfacción de nuestros pacientes. Queremos crear un ambiente donde la salud, el cuidado y la prevención sean nuestra prioridad.</p>
+                </div>
+            </div>
+
+            <!-- Valores -->
+            <div class="values my-5">
+                <h3 class="text-center">Nuestros Valores</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="value-box">
+                            <h4>Compromiso</h4>
+                            <p>Nos comprometemos con la salud de nuestros pacientes y trabajamos cada día para mejorar sus vidas.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="value-box">
+                            <h4>Innovación</h4>
+                            <p>Adoptamos las últimas tecnologías y técnicas médicas para ofrecer tratamientos avanzados.</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="value-box">
+                            <h4>Empatía</h4>
+                            <p>Nos ponemos en los zapatos de nuestros pacientes, brindando cuidado con calidez y comprensión.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nuestro Equipo -->
+            <div class="our-team my-5">
+                <h3 class="text-center">Conoce a Nuestro Equipo</h3>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <img src="{% static 'equipo_1.webp' %}" alt="Dr. Juan Pérez" class="img-fluid rounded-circle">
+                            <h5>Dr. Juan Pérez</h5>
+                            <p>Médico General</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <img src="{% static 'equipo_2.jpg' %}" alt="Dra. Laura García" class="img-fluid rounded-circle">
+                            <h5>Dra. Laura García</h5>
+                            <p>Especialista en Ginecología</p>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="team-member">
+                            <img src="{% static 'equipo_3.jpg' %}" alt="Lic. Marta Ruiz" class="img-fluid rounded-circle">
+                            <h5>Lic. Marta Ruiz</h5>
+                            <p>Psicóloga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+
+
+
+{% endblock %}
