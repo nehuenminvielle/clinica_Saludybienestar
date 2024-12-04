@@ -22,11 +22,7 @@ source clinicaenv/bin/activate
 # Instalar Dependencias
 Instala las dependencias necesarias:
 
-pip install django
-pip install mysqlclient pymysql
-
-Alternativa si usas otro conector de MySQL:
-pip install mysql-connector-python
+pip install -r requirements.txt
 
 # Configurar la Base de Datos
 Asegúrate de que la configuración de la base de datos en settings.py sea correcta para tu entorno de desarrollo.
