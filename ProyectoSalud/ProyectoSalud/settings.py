@@ -128,11 +128,10 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'stmp.gmail.com'
+EMAIL_HOST = 'smtp.gmail.com'  # Corregido de 'stmp' a 'smtp'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'clinicasaludybienestar1@gmail.com'
-EMAIL_HOST_PASSWORD = 'ncpackxxwdczcgdc'
+EMAIL_HOST_PASSWORD = 'btptosxjmrffceid'  # Asegúrate de que esta sea la contraseña correcta o la contraseña de la app
 DEFAULT_FROM_EMAIL = 'clinicasaludybienestar1@gmail.com'
 CONTACT_EMAIL = 'clinicasaludybienestar1@gmail.com'
-EMAIL_USE_TLS = True 

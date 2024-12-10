@@ -840,7 +840,7 @@ def contacto(request):
 
 
 def pagina_de_gracias(request):
-    return render(request,'AppSalud/contacto.html')
+    return render(request,'AppSalud/gracias.html')
 
 @admin.register(MensajeContacto)
 class MensajeContactoAdmin(admin.ModelAdmin):
@@ -850,10 +850,10 @@ class MensajeContactoAdmin(admin.ModelAdmin):
 
 
 def listar_mensajes(request):
-    mensajes=MensajeContacto.objects.all().orderby('-fecha_envio')
+    mensajes=MensajeContacto.objects.all().order_by('-fecha_envio')
     paginator= Paginator(mensajes,10)
     page_number= request.GET.get('page')
     page_obj= paginator.get_page(page_number)
 
-    return render(request,'AppSalud/lista_mensaje.html', {'page_obj': page_obj})
+    return render(request,'AppSalud/listar_mensajes.html', {'page_obj': page_obj})
 
